@@ -6,23 +6,24 @@ locals{
 }
 
 resource "aws_s3_bucket" "bucket" {
-  count                                    = var.create_bucket ? 1 : 0
+//  count                                    = var.create_bucket ? 1 : 0
 
   bucket                                   = local.s3name
-  region                                   = var.bucket_region
   tags                                     = merge(local.shared_tags)
   
   versioning {
     enabled                                = var.enable_versioning
   }
 
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm                      = var.sse_algorithm
-      }
-    }
-  }
+  force_destroy = true
+
+//  server_side_encryption_configuration {
+//    rule {
+//      apply_server_side_encryption_by_default {
+//        sse_algorithm                      = var.sse_algorithm
+//      }
+//    }
+//  }
 //    # Max 1 block - server_side_encryption_configuration
 //  dynamic "server_side_encryption_configuration" {
 //    for_each = length(keys(var.server_side_encryption_configuration)) == 0 ? [] : [var.server_side_encryption_configuration]
@@ -49,3 +50,11 @@ resource "aws_s3_bucket" "bucket" {
 //  }
 
 }
+
+resource "aws_s3_bucket_public_access_block" "root_storage_bucket" {
+  bucket             = aws_s3_bucket.bucket.id
+  ignore_public_acls = true
+  depends_on         = [aws_s3_bucket.bucket]
+}
+
+

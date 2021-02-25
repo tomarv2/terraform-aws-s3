@@ -16,6 +16,7 @@ variable "profile_to_use" {
 
 variable "bucket_name" {
   description = "s3 bucket name."
+  default = null
 }
 
 variable "create_bucket" {

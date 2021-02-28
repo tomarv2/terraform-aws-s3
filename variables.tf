@@ -25,7 +25,7 @@ variable "create_bucket" {
 }
 
 variable "enable_versioning" {
-  default = false
+  default = true
 }
 
 variable "enable_encryption" {

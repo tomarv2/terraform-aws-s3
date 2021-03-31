@@ -17,12 +17,9 @@
 
 # Terraform module for AWS S3
 
-####
-
 > :arrow_right:  Terraform module for [Azure Storage Account](https://registry.terraform.io/modules/tomarv2/storage-account/azure/latest)
 
 > :arrow_right:  Terraform module for [Google Storage](https://registry.terraform.io/modules/tomarv2/storage-bucket/google/latest)
-
 
 ## Versions
 
@@ -62,17 +59,17 @@ export PATH=$PATH:/usr/local/bin/
 
 - Run and verify the output before deploying:
 ```
-tf -cloud aws plan
+tf -cloud aws plan -var='teamid=foo' -var='prjid=bar'
 ```
 
 - Run below to deploy:
 ```
-tf -cloud aws apply
+tf -cloud aws apply -var='teamid=foo' -var='prjid=bar'
 ```
 
 - Run below to destroy:
 ```
-tf -cloud aws destroy
+tf -cloud aws destroy -var='teamid=foo' -var='prjid=bar'
 ```
 
 
@@ -89,16 +86,16 @@ tf -cloud aws destroy
 >
 > For more information refer to [Terraform documentation](https://www.terraform.io/docs/language/values/variables.html)
 
-##### S3
+#### S3
 
 ```
 module "s3" {
-  source = "../.."
-  email  = "demo@demo.com"
+  source = "../"
+  
   #----------------------------------------------
   # Note: Do not change teamid and prjid once set.
-  teamid = "rumse"
-  prjid  = "demo-s3"
+  teamid = var.teamid
+  prjid  = var.prjid
 }
 ```
 

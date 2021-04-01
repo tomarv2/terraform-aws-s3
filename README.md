@@ -52,7 +52,6 @@ pip install tfremote
 export TF_AWS_BUCKET=<remote state bucket name>
 export TF_AWS_PROFILE=default
 export TF_AWS_BUCKET_REGION=us-west-2
-export PATH=$PATH:/usr/local/bin/
 ```  
 
 - Updated `examples` directory to required values.

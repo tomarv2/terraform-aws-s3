@@ -20,7 +20,9 @@ resource "aws_s3_bucket" "bucket" {
 }
 
 resource "aws_s3_bucket_public_access_block" "root_storage_bucket" {
-  bucket              = aws_s3_bucket.bucket.id
+  count = var.deploy_bucket ? 1 : 0
+
+  bucket              = join("", aws_s3_bucket.bucket.*.id)
   ignore_public_acls  = true
   depends_on          = [aws_s3_bucket.bucket]
   block_public_acls   = true

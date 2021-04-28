@@ -91,6 +91,7 @@ tf -cloud aws destroy -var='teamid=foo' -var='prjid=bar'
 module "s3" {
   source = "git::git@github.com:tomarv2/terraform-aws-s3.git"
   
+  aws_region = "us-east-2"
   #----------------------------------------------
   # Note: Do not change teamid and prjid once set.
   teamid = var.teamid

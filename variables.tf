@@ -27,18 +27,21 @@ variable "deploy_bucket" {
 }
 
 variable "enable_versioning" {
-  default = true
-  type    = bool
+  description = "enable versioning on the bucket"
+  default     = true
+  type        = bool
 }
 
 variable "enable_encryption" {
-  default = false
-  type    = bool
+  description = "enable encryption on the bucket"
+  default     = false
+  type        = bool
 }
 
 variable "sse_algorithm" {
-  default = "AES256"
-  type    = string
+  description = "encryption algorithm"
+  default     = "AES256"
+  type        = string
 }
 
 variable "server_side_encryption_configuration" {

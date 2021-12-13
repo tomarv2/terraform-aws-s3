@@ -1,9 +1,9 @@
 output "s3_bucket_name" {
   description = "The name of the s3 bucket."
-  value       = module.s3.s3_bucket_name
+  value       = module.s3.bucket_name
 }
 
 output "s3_bucket_arn" {
   description = "The ARN of the s3 bucket."
-  value       = module.s3.s3_bucket_arn
+  value       = module.s3.bucket_arn
 }

@@ -8,24 +8,38 @@ resource "aws_s3_bucket" "bucket" {
     enabled = var.enable_versioning
   }
 
-  force_destroy = true
-
   server_side_encryption_configuration {
     rule {
       apply_server_side_encryption_by_default {
-        sse_algorithm = "AES256"
+        sse_algorithm = var.sse_algorithm
       }
     }
   }
 }
 
-resource "aws_s3_bucket_public_access_block" "root_storage_bucket" {
-  count = var.deploy_bucket ? 1 : 0
+resource "aws_s3_bucket_policy" "this" {
+  count = var.deploy_bucket && local.attach_policy ? 1 : 0
 
-  bucket                  = join("", aws_s3_bucket.bucket.*.id)
-  ignore_public_acls      = true
-  depends_on              = [aws_s3_bucket.bucket]
-  block_public_acls       = true
-  block_public_policy     = true
-  restrict_public_buckets = true
+  bucket     = aws_s3_bucket.bucket[0].id
+  policy     = data.aws_iam_policy_document.combined[0].json
+  depends_on = [aws_s3_bucket_public_access_block.default]
+}
+
+data "aws_iam_policy_document" "combined" {
+  count = var.deploy_bucket && local.attach_policy ? 1 : 0
+
+  source_policy_documents = compact([
+    var.attach_policy ? var.policy : ""
+  ])
+}
+
+resource "aws_s3_bucket_public_access_block" "default" {
+  count = var.deploy_bucket && local.public_access_block_enabled ? 1 : 0
+
+  bucket = local.s3name
+
+  block_public_acls       = var.block_public_acls
+  block_public_policy     = var.block_public_policy
+  ignore_public_acls      = var.ignore_public_acls
+  restrict_public_buckets = var.restrict_public_buckets
 }

@@ -3,19 +3,18 @@ repos:
     rev: v1.48.0
     hooks:
       - id: terraform_fmt
-      - id: terraform_validate
       - id: terraform_tflint
         args:
           - '--args=--only=terraform_deprecated_interpolation'
           - '--args=--only=terraform_deprecated_index'
-          #- '--args=--only=terraform_unused_declarations' #
+          - '--args=--only=terraform_unused_declarations' #
           - '--args=--only=terraform_comment_syntax'
           - '--args=--only=terraform_documented_outputs'
           - '--args=--only=terraform_documented_variables'
           - '--args=--only=terraform_typed_variables'
-          - '--args=--only=terraform_module_pinned_source'
+          #- '--args=--only=terraform_module_pinned_source'
           - '--args=--only=terraform_naming_convention'
-          - '--args=--only=terraform_required_providers'
+          #- '--args=--only=terraform_required_providers'
           #- '--args=--only=terraform_standard_module_structure' #
           - '--args=--only=terraform_workspace_remote'
 
@@ -28,8 +27,8 @@ repos:
       - id: check-yaml
 
   - repo: https://github.com/bridgecrewio/checkov.git
-    rev: '1.0.864' # change to tag or sha
+    rev: '2.0.469'
     hooks:
     - id: checkov
       verbose: true
-      args: ["-d .", "--framework", "terraform", "--skip-check", "CKV_AWS_18,CKV_AWS_52", "-o", "json"]
+      args: ["-d .", "--framework", "terraform", "--skip-check", "CKV_AWS_18,CKV_AWS_52,CKV_AWS_144,CKV2_AWS_6,CKV_AWS_145"]

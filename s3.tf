@@ -1,4 +1,4 @@
-resource "aws_s3_bucket" "bucket" {
+resource "aws_s3_bucket" "default" {
   count = var.deploy_bucket ? 1 : 0
 
   bucket = local.s3name
@@ -20,7 +20,7 @@ resource "aws_s3_bucket" "bucket" {
 resource "aws_s3_bucket_policy" "this" {
   count = var.deploy_bucket && local.attach_policy ? 1 : 0
 
-  bucket     = aws_s3_bucket.bucket[0].id
+  bucket     = aws_s3_bucket.default[0].id
   policy     = data.aws_iam_policy_document.combined[0].json
   depends_on = [aws_s3_bucket_public_access_block.default]
 }

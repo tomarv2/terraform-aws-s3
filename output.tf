@@ -1,6 +1,6 @@
 output "bucket_name" {
   description = "The name of the s3 bucket."
-  value       = join("", aws_s3_bucket.default.*.bucket_domain_name)
+  value       = join("", aws_s3_bucket.default.*.bucket)
 }
 
 output "bucket_id" {

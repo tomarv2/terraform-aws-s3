@@ -3,11 +3,6 @@ output "s3_bucket_name" {
   value       = module.s3.bucket_name
 }
 
-output "bucket_name" {
-  description = "The name of the s3 bucket."
-  value       = module.s3.bucket_name
-}
-
 output "bucket_id" {
   description = "The id of the s3 bucket."
   value       = module.s3.bucket_id

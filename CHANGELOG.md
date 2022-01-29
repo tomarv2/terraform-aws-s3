@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## [v0.0.6](https://github.com/tomarv2/terraform-aws-s3/releases/tag/v0.0.6) - 2022-01-29 09:31:18
+
+*No description*
+
 ## [v0.0.5](https://github.com/tomarv2/terraform-aws-s3/releases/tag/v0.0.5) - 2022-01-29 07:00:20
 
 *No description*

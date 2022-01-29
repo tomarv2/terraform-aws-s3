@@ -5,8 +5,7 @@ locals {
 
   shared_tags = tomap(
     {
-      "team"    = var.teamid,
-      "project" = var.prjid
+      "team"    = var.teamid
     }
   )
 }

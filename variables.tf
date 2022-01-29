@@ -67,3 +67,9 @@ variable "policy" {
   type        = string
   default     = null
 }
+
+variable "custom_tags" {
+  type        = any
+  description = "Extra custom tags"
+  default     = null
+}

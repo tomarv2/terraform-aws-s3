@@ -55,3 +55,9 @@ variable "aws_region" {
   default     = "us-west-2"
   type        = string
 }
+
+variable "custom_tags" {
+  type        = any
+  description = "Extra custom tags"
+  default     = null
+}

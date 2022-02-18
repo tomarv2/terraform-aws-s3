@@ -1,33 +1,49 @@
 variable "teamid" {
-  description = "(Required) Name of the team/group e.g. devops, dataengineering. Should not be changed after running 'tf apply'"
+  description = "Name of the team/group e.g. devops, dataengineering. Should not be changed after running 'tf apply'"
   type        = string
 }
 
 variable "prjid" {
-  description = "(Required) Name of the project/stack e.g: mystack, nifieks, demoaci. Should not be changed after running 'tf apply'"
+  description = "Name of the project/stack e.g: mystack, nifieks, demoaci. Should not be changed after running 'tf apply'"
   type        = string
 }
 
 variable "bucket_name" {
-  description = "s3 bucket name."
+  description = "s3 bucket name"
   default     = null
   type        = string
 }
 
 variable "deploy_bucket" {
-  description = "feature flag, true or false"
+  description = "Feature flag, true or false"
   default     = true
   type        = bool
 }
 
 variable "enable_versioning" {
-  description = "enable versioning on the bucket"
+  description = "Enable versioning on the bucket"
+  default     = true
+  type        = bool
+}
+variable "enable_server_side_encryption" {
+  description = "Enable versioning on the bucket"
+  default     = true
+  type        = bool
+}
+variable "enable_accelerate_configuration" {
+  description = "Enable accelerate configuration on the bucket"
+  default     = true
+  type        = bool
+}
+
+variable "enable_cors_configuration" {
+  description = "Enable bucket cors configuration"
   default     = true
   type        = bool
 }
 
 variable "sse_algorithm" {
-  description = "encryption algorithm"
+  description = "Encryption algorithm"
   default     = "AES256"
   type        = string
 }
@@ -63,7 +79,7 @@ variable "attach_policy" {
 }
 
 variable "policy" {
-  description = "(Optional) A valid bucket policy JSON document. Note that if the policy document is not specific enough (but still valid), Terraform may view the policy as constantly changing in a terraform plan. In this case, please make sure you use the verbose/specific version of the policy. For more information about building AWS IAM policy documents with Terraform, see the AWS IAM Policy Document Guide."
+  description = "A valid bucket policy JSON document. Note that if the policy document is not specific enough (but still valid), Terraform may view the policy as constantly changing in a terraform plan. In this case, please make sure you use the verbose/specific version of the policy. For more information about building AWS IAM policy documents with Terraform, see the AWS IAM Policy Document Guide."
   type        = string
   default     = null
 }

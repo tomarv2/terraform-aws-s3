@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## [v0.0.3-updated](https://github.com/tomarv2/terraform-aws-s3/releases/tag/v0.0.3-updated) - 2022-02-18 17:51:28
+## [v0.0.3-updated](https://github.com/tomarv2/terraform-aws-s3/releases/tag/v0.0.3-updated) - 2022-02-18 18:01:16
 
 Adding support for custom tags
 

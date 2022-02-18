@@ -8,6 +8,12 @@ variable "prjid" {
   type        = string
 }
 
+variable "profile_to_use" {
+  description = "Getting values from ~/.aws/credentials"
+  default     = "default"
+  type        = string
+}
+
 variable "bucket_name" {
   description = "s3 bucket name."
   default     = null
@@ -26,46 +32,28 @@ variable "enable_versioning" {
   type        = bool
 }
 
+variable "enable_encryption" {
+  description = "enable encryption on the bucket"
+  default     = false
+  type        = bool
+}
+
 variable "sse_algorithm" {
   description = "encryption algorithm"
   default     = "AES256"
   type        = string
 }
 
-variable "block_public_acls" {
-  type        = bool
-  default     = true
-  description = "Set to `false` to disable the blocking of new public access lists on the bucket"
+variable "server_side_encryption_configuration" {
+  description = "Map containing server-side encryption configuration."
+  type        = any
+  default     = {}
 }
 
-variable "block_public_policy" {
-  type        = bool
-  default     = true
-  description = "Set to `false` to disable the blocking of new public policies on the bucket"
-}
-
-variable "ignore_public_acls" {
-  type        = bool
-  default     = true
-  description = "Set to `false` to disable the ignoring of public access lists on the bucket"
-}
-
-variable "restrict_public_buckets" {
-  type        = bool
-  default     = true
-  description = "Set to `false` to disable the restricting of making the bucket public"
-}
-
-variable "attach_policy" {
-  description = "Controls if S3 bucket should have bucket policy attached (set to `true` to use value of `policy` as bucket policy)"
-  type        = bool
-  default     = false
-}
-
-variable "policy" {
-  description = "(Optional) A valid bucket policy JSON document. Note that if the policy document is not specific enough (but still valid), Terraform may view the policy as constantly changing in a terraform plan. In this case, please make sure you use the verbose/specific version of the policy. For more information about building AWS IAM policy documents with Terraform, see the AWS IAM Policy Document Guide."
+variable "aws_region" {
+  description = "aws region to create resources"
+  default     = "us-west-2"
   type        = string
-  default     = null
 }
 
 variable "custom_tags" {

@@ -73,3 +73,9 @@ variable "custom_tags" {
   description = "Extra custom tags"
   default     = null
 }
+
+variable "aws_region" {
+  description = "aws region to create resources"
+  default     = "us-west-2"
+  type        = string
+}

@@ -23,87 +23,74 @@
 
 ## Versions
 
-- Module tested for Terraform 1.0.1.
-- AWS provider version [3.63](https://registry.terraform.io/providers/hashicorp/aws/latest).
+- Module tested for Terraform 0.14.
+- AWS provider version [3.30.0](https://registry.terraform.io/providers/hashicorp/aws/latest).
 - `main` branch: Provider versions not pinned to keep up with Terraform releases.
 - `tags` releases: Tags are pinned with versions (use <a href="https://github.com/tomarv2/terraform-aws-s3/tags" alt="GitHub tag">
         <img src="https://img.shields.io/github/v/tag/tomarv2/terraform-aws-s3" /></a>).
 
+**NOTE:**
+
+- Read more on [tfremote](https://github.com/tomarv2/tfremote)
+
 ## Usage
 
-### Option 1:
+Recommended method:
 
-```
-terrafrom init
-terraform plan -var='teamid=tryme' -var='prjid=project1'
-terraform apply -var='teamid=tryme' -var='prjid=project1'
-terraform destroy -var='teamid=tryme' -var='prjid=project1'
-```
-**Note:** With this option please take care of remote state storage
-
-### Option 2:
-
-#### Recommended method (stores remote state in S3 using `prjid` and `teamid` to create directory structure):
-
-- Create python 3.8+ virtual environment
+- Create python 3.6+ virtual environment
 ```
 python3 -m venv <venv name>
 ```
 
 - Install package:
 ```
-pip install tfremote --upgrade
+pip install tfremote
 ```
 
 - Set below environment variables:
 ```
 export TF_AWS_BUCKET=<remote state bucket name>
+export TF_AWS_PROFILE=default
 export TF_AWS_BUCKET_REGION=us-west-2
-export TF_AWS_PROFILE=<profile from ~/.ws/credentials>
 ```
 
-or
-
-- Set below environment variables:
-```
-export TF_AWS_BUCKET=<remote state bucket name>
-export TF_AWS_BUCKET_REGION=us-west-2
-export AWS_ACCESS_KEY_ID=<aws_access_key_id>
-export AWS_SECRET_ACCESS_KEY=<aws_secret_access_key>
-```
-
-- Updated `examples` directory with required values.
+- Updated `examples` directory to required values.
 
 - Run and verify the output before deploying:
 ```
-tf -c=aws plan -var='teamid=foo' -var='prjid=bar'
+tf -cloud aws plan -var='teamid=foo' -var='prjid=bar'
 ```
 
 - Run below to deploy:
 ```
-tf -c=aws apply -var='teamid=foo' -var='prjid=bar'
+tf -cloud aws apply -var='teamid=foo' -var='prjid=bar'
 ```
 
 - Run below to destroy:
 ```
-tf -c=aws destroy -var='teamid=foo' -var='prjid=bar'
+tf -cloud aws destroy -var='teamid=foo' -var='prjid=bar'
 ```
 
-**NOTE:**
+> ❗️ **Important** - Two variables are required for using `tf` package:
+>
+> - teamid
+> - prjid
+>
+> These variables are required to set backend path in the remote storage.
+> Variables can be defined using:
+>
+> - As `inline variables` e.g.: `-var='teamid=demo-team' -var='prjid=demo-project'`
+> - Inside `.tfvars` file e.g.: `-var-file=<tfvars file location> `
+>
+> For more information refer to [Terraform documentation](https://www.terraform.io/docs/language/values/variables.html)
 
-- Read more on [tfremote](https://github.com/tomarv2/tfremote)
----
-
-##### S3
+#### S3
 
 ```
-provider "aws" {
-  region  = "us-west-2"
-}
-
 module "s3" {
   source = "git::git@github.com:tomarv2/terraform-aws-s3.git"
 
+  aws_region = "us-east-2"
   #----------------------------------------------
   # Note: Do not change teamid and prjid once set.
   teamid = var.teamid

@@ -1,19 +1,15 @@
-output "bucket_name" {
+output "s3_bucket_name" {
   description = "The name of the s3 bucket."
-  value       = join("", aws_s3_bucket.default.*.bucket)
+  value       = join("", aws_s3_bucket.bucket.*.bucket)
 }
 
-output "bucket_id" {
+
+output "s3_bucket_id" {
   description = "The id of the s3 bucket."
-  value       = join("", aws_s3_bucket.default.*.id)
+  value       = join("", aws_s3_bucket.bucket.*.id)
 }
 
-output "bucket_arn" {
+output "s3_bucket_arn" {
   description = "The ARN of the s3 bucket."
-  value       = join("", aws_s3_bucket.default.*.arn)
-}
-
-output "bucket_region" {
-  value       = join("", aws_s3_bucket.default.*.region)
-  description = "Bucket region"
+  value       = join("", aws_s3_bucket.bucket.*.arn)
 }

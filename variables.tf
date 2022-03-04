@@ -15,7 +15,7 @@ variable "bucket_name" {
 }
 
 variable "deploy_bucket" {
-  description = "feature flag, true or false"
+  description = "Feature flag, true or false"
   default     = true
   type        = bool
 }

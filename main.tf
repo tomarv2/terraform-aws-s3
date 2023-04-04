@@ -2,7 +2,7 @@ resource "aws_s3_bucket" "default" {
   count = var.deploy_bucket ? 1 : 0
 
   bucket = local.s3name
-  tags   = var.custom_tags != null ? merge(var.custom_tags, local.shared_tags) : merge(local.shared_tags)
+  tags   = var.extra_tags != null ? merge(var.extra_tags, local.shared_tags) : merge(local.shared_tags)
 
   versioning {
     enabled = var.enable_versioning
